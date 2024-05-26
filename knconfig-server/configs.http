@@ -1,0 +1,16 @@
+### list
+GET http://localhost:9129/list?app=app1&env=dev&ns=public
+
+### update
+POST http://localhost:9129/update?app=app1&env=dev&ns=public
+Content-Type: application/json
+
+{
+  "kn.a": "dev200",
+  "kn.b": "bb200",
+  "kn.c": "cc200"
+}
+
+
+### version
+http://localhost:9129/version?app=app1&env=dev&ns=public

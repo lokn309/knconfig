@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: knconfig-demo
+
+kn:
+  a: a00
+  b: b00
+  c: c00
