@@ -47,6 +47,7 @@ public class PropertySourcesProcessor implements BeanFactoryPostProcessor, Envir
 
     @Override
     public int getOrder() {
+        // 设置最高优先级，越小优先级越高
         return PriorityOrdered.HIGHEST_PRECEDENCE;
     }
 
