@@ -28,21 +28,29 @@ public class PropertySourcesProcessor implements BeanFactoryPostProcessor, Envir
     Environment environment;
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        ConfigurableEnvironment env = (ConfigurableEnvironment) environment;
-        if (env.getPropertySources().contains(KN_PROPERTY_SOURCES)) {
+        ConfigurableEnvironment ENV = (ConfigurableEnvironment) environment;
+        if (ENV.getPropertySources().contains(KN_PROPERTY_SOURCES)) {
             return;
         }
         // 通过 http 请求，去knconfig-server获取配置 TODO
-        Map<String, String> config = new HashMap<>();
-        config.put("kn.a", "dev100");
-        config.put("kn.b", "b500");
-        config.put("kn.c", "c700");
-        KNConfigService configService = new KNConfigServiceImpl(config);
+//        Map<String, String> config = new HashMap<>();
+//        config.put("kn.a", "dev100");
+//        config.put("kn.b", "b500");
+//        config.put("kn.c", "c700");
+
+        String app = ENV.getProperty("knconfig.app", "app1");
+        String env = ENV.getProperty("knconfig.env", "dev");
+        String ns = ENV.getProperty("knconfig.ns", "public");
+        String configServer = ENV.getProperty("knconfig.configServer", "http://localhost:9129");
+
+        ConfigMeta configMeta = new ConfigMeta(app, env, ns ,configServer);
+
+        KNConfigService configService = KNConfigService.getDefault(configMeta);
         KNPropertySource propertySource = new KNPropertySource(KN_PROPERTY_SOURCES, configService);
         CompositePropertySource composite = new CompositePropertySource(KN_PROPERTY_SOURCE);
         composite.addPropertySource(propertySource);
         // 让其优先获取配置
-        env.getPropertySources().addFirst(composite);
+        ENV.getPropertySources().addFirst(composite);
     }
 
     @Override

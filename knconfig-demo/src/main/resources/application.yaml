@@ -6,3 +6,10 @@ kn:
   a: a00
   b: b00
   c: c00
+
+server:
+  port: 8888
+logging:
+  level:
+    root: info
+    cn.lokn: debug
