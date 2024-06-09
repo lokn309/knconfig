@@ -6,7 +6,7 @@ POST http://localhost:9129/update?app=app1&env=dev&ns=public
 Content-Type: application/json
 
 {
-  "kn.a": "dev200",
+  "kn.a": "dev688",
   "kn.b": "bb200",
   "kn.c": "cc200"
 }
@@ -14,3 +14,6 @@ Content-Type: application/json
 
 ### version
 http://localhost:9129/version?app=app1&env=dev&ns=public
+
+### demo
+http://localhost:8888/demo

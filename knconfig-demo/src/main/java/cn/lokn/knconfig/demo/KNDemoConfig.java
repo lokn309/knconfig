@@ -12,4 +12,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "kn")
 public class KNDemoConfig {
     String a;
+    String b;
 }
