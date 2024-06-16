@@ -1,5 +1,5 @@
 ### list
-GET http://localhost:9129/list?app=app1&env=dev&ns=public
+GET http://localhost:9130/list?app=app1&env=dev&ns=public
 
 ### update
 POST http://localhost:9129/update?app=app1&env=dev&ns=public
@@ -17,3 +17,14 @@ http://localhost:9129/version?app=app1&env=dev&ns=public
 
 ### demo
 http://localhost:8888/demo
+
+### update knrpc config
+POST http://localhost:9129/update?app=app1&env=dev&ns=public
+Content-Type: application/json
+
+{
+  "knrpc.provider.metas.dc": "sz",
+  "knrpc.provider.metas.gray": "true",
+  "knrpc.provider.metas.unit": "S001",
+  "knrpc.provider.metas.tc": 10
+}

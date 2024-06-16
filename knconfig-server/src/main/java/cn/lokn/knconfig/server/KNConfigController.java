@@ -5,6 +5,7 @@ import cn.lokn.knconfig.server.model.Configs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,9 @@ public class KNConfigController {
 
     @Autowired
     ConfigsMapper mapper;
+
+    @Autowired
+    DistributedLocks distributedLocks;
 
     Map<String, Long> VERSIONS = new HashMap<>();
 
@@ -52,6 +56,12 @@ public class KNConfigController {
     @GetMapping("/version")
     public long version(String app, String env, String ns) {
         return VERSIONS.getOrDefault(app + "-" + env + "-" + ns , -1L);
+    }
+
+    @GetMapping("/status")
+    public boolean status() {
+        List<String> s = new ArrayList<>();
+        return distributedLocks.getLocked().get();
     }
 
 }
